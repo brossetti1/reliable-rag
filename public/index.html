@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reliable‑RAG UI</title>
+  <style>
+    body { font-family: sans-serif; padding: 1rem; }
+    nav button { margin-right: .5rem; }
+    .tab { display: none; }
+    .tab.active { display: block; }
+  </style>
+</head>
+<body>
+  <nav>
+    <button data-tab="ingest">Ingest</button>
+    <button data-tab="query">Query</button>
+  </nav>
+
+  <div id="ingest" class="tab">
+    <h2>Ingest URLs</h2>
+    <textarea id="urls" rows="5" style="width:100%;"></textarea><br>
+    <button id="btn-ingest">Ingest</button>
+    <pre id="ingest-result"></pre>
+  </div>
+
+  <div id="query" class="tab">
+    <h2>Run Query</h2>
+    <input id="qtext" type="text" style="width:80%;" placeholder="Your question…" />
+    <button id="btn-query">Submit</button>
+    <pre id="query-result"></pre>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
