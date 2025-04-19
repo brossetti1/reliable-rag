@@ -41,8 +41,7 @@ flowchart LR
 ## Clone & enter
 
 ```bash
-bash
-git clone <repo-url> reliable-rag
+git clone git@github.com:brossetti1/reliable-rag.git
 cd reliable-rag
 ```
 
