@@ -12,11 +12,13 @@ document.querySelector('nav button').click();
 document.getElementById('btn-ingest').onclick = async () => {
   const raw = document.getElementById('urls').value;
   const urls = raw.split(/,\s*/).filter(u => u);
+  console.log('urls', urls);
   const res = await fetch('/api/ingest', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({ urls })
   }).then(r => r.json());
+  console.log('res', res);
   document.getElementById('ingest-result').textContent = JSON.stringify(res, null, 2);
 };
 

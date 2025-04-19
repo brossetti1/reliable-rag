@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { ingest } from './ingest.js';
-import { queryPipeline } from './query.js';
+import { ingest } from './ingest';
+import { queryPipeline } from './query';
 
 const app = express();
 app.use(cors());
@@ -11,6 +11,7 @@ app.use(express.static('public'));
 
 app.post('/api/ingest', async (req, res) => {
   const { urls } = req.body;
+  console.log('Ingesting URLs:', urls);
   const result = await ingest(urls);
   res.json(result);
 });

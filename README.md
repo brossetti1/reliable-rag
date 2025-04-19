@@ -45,14 +45,6 @@ git clone git@github.com:brossetti1/reliable-rag.git
 cd reliable-rag
 ```
 
-# Env vars: Create a .env file:
-
-```bash
-OPENAI_API_KEY=your_key_here
-COHERE_API_KEY=your_key_here
-CHROMA_SERVER_URL=http://localhost:8000
-```
-
 # Install dependencies (using pnpm or npm):
 
 ```bash
@@ -62,7 +54,24 @@ pnpm install
 npm install
 ```
 
-Run Chroma: If self‑hosting, start your Chroma DB at the URL above.
+# Chroma setup
+
+you can see the full instructions for [langchain chroma here](https://js.langchain.com/docs/integrations/vectorstores/chroma/). add chroma to docker and Run Chroma:
+
+```bash
+docker pull chromadb/chroma
+docker run -p 8000:8000 chromadb/chroma
+```
+**If self‑hosting, start your Chroma DB at the URL above.
+
+# Env vars: Create a .env file:
+
+```bash
+OPENAI_API_KEY=your_key_here
+COHERE_API_KEY=your_key_here
+CHROMA_SERVER_URL=http://localhost:8000
+```
+
 
 # ▶️ Running Locally
 ## Start server & UI

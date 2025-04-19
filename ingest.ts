@@ -17,6 +17,7 @@ async function loadAndSplit(urls: string[]): Promise<Document[]> {
 export async function ingest(urls: string[]) {
   const chunks = await loadAndSplit(urls);
   const embedding = new CohereEmbeddings({ model: 'embed-english-v3.0' });
+  console.log('Ingesting documents:');
   const store = new Chroma(embedding, {
       collectionName: 'reliable-rag',
       url: process.env.CHROMA_SERVER_URL,
