@@ -77,7 +77,7 @@ CHROMA_SERVER_URL=http://localhost:8000
 ## Start server & UI
 
 ```bash
-pnpm start
+pnpm dev
 ```
 
 Then open http://localhost:3000 in your browser.
