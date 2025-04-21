@@ -14,6 +14,7 @@
   <nav>
     <button data-tab="ingest">Ingest</button>
     <button data-tab="query">Query</button>
+    <button data-tab="docs">Docs</button>
   </nav>
 
   <div id="ingest" class="tab">
@@ -28,6 +29,12 @@
     <input id="qtext" type="text" style="width:80%;" placeholder="Your question…" />
     <button id="btn-query">Submit</button>
     <pre id="query-result"></pre>
+  </div>
+
+  <div id="docs" class="tab">
+    <h2>Chroma Documents</h2>
+    <button id="btn-docs">Load Docs</button>
+    <pre id="docs-result"></pre>
   </div>
 
   <script src="app.js"></script>

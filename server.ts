@@ -1,8 +1,29 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import { ingest } from './ingest.js';
 import { queryPipeline } from './query.js';
+
+import { Chroma } from '@langchain/community/vectorstores/chroma';
+import { CohereEmbeddings } from '@langchain/cohere';
+import { ChromaClient } from 'chromadb';
+
+// helper to get a ready‑to‑use store
+async function getChromaStore() {
+  // 1. low‑level HTTP client pointing at your server
+  const client = new ChromaClient({ path: process.env.CHROMA_SERVER_URL });
+  // 2. instantiate your embedding provider
+  const embeddings = new CohereEmbeddings({ model: 'embed-english-v3.0' });
+  // 3. load the existing Chroma collection
+  return Chroma.fromExistingCollection(embeddings,
+    {
+      url: process.env.CHROMA_SERVER_URL,
+      index: client,
+      collectionName: 'reliable-rag',
+    }
+  );
+}
 
 const app = express();
 app.use(cors());
@@ -36,6 +57,20 @@ app.post('/api/query', async (req, res) => {
   } catch (err) {
     console.error('❌ Query error:', err);
     res.status(500).json({ error: 'Query failed' });
+  }
+});
+
+app.get('/api/docs', async (_req, res) => {
+  console.log('📄 GET /api/docs');
+  try {
+    const store = await getChromaStore();
+    const internalClient = (store as any).collection;
+    const docs = await internalClient.get({});
+    console.log(`✅ /api/docs returned ${docs.length} docs`);
+    res.json({  ids: docs.ids, docs, metadata: docs.metadatas });
+  } catch (err) {
+    console.error('❌ /api/docs error:', err);
+    res.status(500).json({ error: 'Could not list documents' });
   }
 });
 

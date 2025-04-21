@@ -55,3 +55,18 @@ document.getElementById('btn-query').onclick = async () => {
     document.getElementById('query-result').textContent = `Error: ${err}`;
   }
 };
+
+console.log('🔌 Setting up docs handler');
+document.getElementById('btn-docs').onclick = async () => {
+  console.log('🖱️ Docs button clicked');
+  try {
+    const res = await fetch('/api/docs');
+    const data = await res.json();
+    console.log('📥 Docs response received:', data);
+    document.getElementById('docs-result').textContent =
+      JSON.stringify(data, null, 2);
+  } catch (err) {
+    console.error('❌ Error fetching docs:', err);
+    document.getElementById('docs-result').textContent = `Error: ${err}`;
+  }
+};
